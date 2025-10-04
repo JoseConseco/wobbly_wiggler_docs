@@ -47,7 +47,7 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-to-use-quick-start">How To Use - Quick Start</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#simulation-mode">Simulation Mode</a>
+    <li class="toctree-l2"><a class="reference internal" href="#simulation-modes">Simulation Modes</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#jiggle-settings">Jiggle Settings</a>
         <ul>
@@ -137,12 +137,13 @@ Your browser does not support the video tag.
 <li>Press <code>Run Spring</code> (the animation must be playing if you use 'Animated' mode - see below)</li>
 </ul>
 <p>To assign new bones to an existing jiggle group, use the <code>Assign Jiggle to bones</code> button from the <a href="#ww-menu">WW Menu</a>.</p>
-<h4 id="simulation-mode">Simulation Mode</h4>
+<h4 id="simulation-modes">Simulation Modes</h4>
 <p>Jiggle Physics can be run in two modes:</p>
 <ul>
-<li><strong>Interactive</strong> - good for mouse interaction with jiggle bones, but it won't work when baking or rendering animation</li>
-<li><strong>Animated</strong> - only works when animation playback is enabled. Useful for rendering animation.</li>
+<li><strong>Interactive</strong> - good for real-time mouse interaction with jiggle bones. No need to play animation - animated sim will often look choppy in Interactive mode.</li>
+<li><strong>Animated</strong> - it works only when animation is playing. Useful for rendering animation.</li>
 </ul>
+<p><strong>Note</strong>: Bone simulation when: action baking or during render, won't work in <code>Interactive</code> mode. Wobbly Wiggler built-in <a href="#baking-jiggle-animation">Bake Wiggle</a> operator will automatically use Animated mode.</p>
 <h4 id="jiggle-settings">Jiggle Settings</h4>
 <video style="width:100%" controls>
   <source src="./img/ww_settings.mp4" type="video/mp4">
@@ -168,6 +169,9 @@ Your browser does not support the video tag.
 </video>
 <p><em>Demo of how wind can affect jiggle bones. Demo uses Animated mode.</em></p>
 <p>With <strong>Wind Influence</strong>, you can control how much wind affects the selected jiggle group. This allows you to disable the wind effect for fingers.</p>
+<blockquote>
+<p><strong>Note</strong>: Wind <code>Noise</code> effect won't work in Interactive mode (noise amplitude is calculated based on frame number).</p>
+</blockquote>
 <h5 id="translation-jiggle">Translation Jiggle</h5>
 <video style="width:100%" controls>
     <source src="./img/translation_jiggle.mp4" type="video/mp4">
@@ -367,5 +371,5 @@ Your browser does not support the video tag.
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-10-03 09:38:00.701541+00:00
+Build Date UTC : 2025-10-04 18:59:05.351237+00:00
 -->
