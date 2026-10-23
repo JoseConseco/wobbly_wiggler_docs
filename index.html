@@ -13,7 +13,7 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Home";
+        var mkdocs_page_name = "Wobbly Wiggler";
         var mkdocs_page_input_path = "index.md";
         var mkdocs_page_url = null;
       </script>
@@ -31,7 +31,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="." class="icon icon-home"> Wobbly Wiggler Docs
+          <a href="index.html" class="icon icon-home"> Wobbly Wiggler Docs
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -41,7 +41,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Home</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Wobbly Wiggler</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#location">Location</a>
     </li>
@@ -49,8 +49,12 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#simulation-modes">Simulation Modes</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#solvers-verlet-and-xpbd">Solvers: Verlet and XPBD</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#jiggle-settings">Jiggle Settings</a>
         <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#scale-invariant-gravity">Scale Invariant Gravity</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#jiggle-influence">Jiggle Influence</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#wind">Wind</a>
@@ -61,11 +65,39 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#maximum-angle">Maximum Angle</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#fk-mode-use-rotation-jiggle-off">FK Mode (Use Rotation Jiggle Off)</a>
+    </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#collisions">Collisions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#collision-settings">Collision Settings</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#physics-presets">Physics presets</a>
+    <li class="toctree-l3"><a class="reference internal" href="#bone-to-bone-collisions">Bone-to-Bone Collisions</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#bone-to-bone-panel">Bone-to-Bone Panel</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#colliders-from-other-armatures">Colliders from Other Armatures</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#bone-to-mesh-collisions">Bone-to-Mesh Collisions</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#bone-connections">Bone Connections</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#connections-panel">Connections Panel</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rest-length">Rest Length</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#two-and-one-way-connections">Two and One-Way Connections</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#glue-to-an-object">Glue to an Object</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#physics-presets">Physics Presets</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#baking-jiggle-animation">Baking Jiggle Animation</a>
         <ul>
@@ -81,6 +113,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#ww-menu">WW Menu</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#credits">Credits</a>
+    </li>
     </ul>
                 </li>
               </ul>
@@ -91,14 +125,14 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href=".">Wobbly Wiggler Docs</a>
+          <a href="index.html">Wobbly Wiggler Docs</a>
         
       </nav>
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Home</li>
+    <li><a href="index.html" class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Wobbly Wiggler</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -107,227 +141,408 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h2 id="wobbly-wiggler">Wobbly Wiggler</h2>
-<p>Wobbly Wiggler (WW) is a Blender add-on for adding jiggle simulation on top of animated bones.</p>
+                <h1 id="wobbly-wiggler">Wobbly Wiggler</h1>
+<p>Wobbly Wiggler (WW) is a Blender add-on designed to add jiggle simulation on top of animated bones.</p>
 <video style="width:100%" controls autoplay loop mute>
   <source src="./img/ww_jump.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video>
-<p><em>Demo of same animation with and without jiggle</em></p>
-<p>Tired of manually adding secondary motion to your character? Wobbly Wiggler will do it for you.</p>
+<p><em>Demo of the same animation with and without jiggle</em></p>
+<p>Tired of manually adding secondary motion to your character? Wobbly Wiggler does it for you.</p>
 <video style="width:100%" controls autoplay loop mute>
   <source src="./img/ww_punch_fast.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video>
-<p><em>Demo of same animation with and without jiggle</em></p>
-<h4 id="location">Location</h4>
+<p><em>Demo of the same animation with and without jiggle</em></p>
+<h2 id="location">Location</h2>
 <!-- ![WWiggler Run Cycle](./img/mononoke-run-cycle.gif) -->
 
-<p>In the right sidebar of Blender's 3D View &gt; <strong>Tools</strong> Tab &gt; <strong>Wobbly Wiggler</strong> panel
-The <code>Tools</code> category can be changed in WW preferences.</p>
+<p>Find it in the right sidebar of Blender's 3D View under the <strong>Tools</strong> tab &gt; <strong>Wobbly Wiggler</strong> panel.
+The <code>Tools</code> category can be customized in the WW preferences.</p>
+<p><strong>Requires Blender 5.2 or newer.</strong></p>
 <video style="width:100%" controls>
   <source src="./img/ww_demo.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video>
-<p><em>Demo of jiggle applied to AutoRig Pro rig. Optional translation and roll jiggle can be toggled. All simulated in <code>Interactive</code> mode.</em></p>
-<h4 id="how-to-use-quick-start">How To Use - Quick Start</h4>
+<p><em>Demo of jiggle applied to an AutoRig Pro rig. Optional translation and roll jiggle can be toggled. Simulated entirely in <code>Interactive</code> mode.</em></p>
+<h2 id="how-to-use-quick-start">How To Use - Quick Start</h2>
 <ul>
-<li>Enter armature <strong>pose mode</strong> and select a few bones,</li>
-<li>In Wobbly Wiggler Panel &gt; Click [+] button to assign jiggle physics,</li>
-<li>Press <code>Run Spring</code> (the animation must be playing if you use 'Animated' mode - see below)</li>
+<li>Enter armature <strong>pose mode</strong> and select a few bones.</li>
+<li>In the Wobbly Wiggler panel, click the <code>[+]</code> button to assign jiggle physics.</li>
+<li>Press <code>Run Physics</code> (note that the animation must be playing if you are using 'Animated' mode—see below).</li>
 </ul>
 <p>To assign new bones to an existing jiggle group, use the <code>Assign Jiggle to bones</code> button from the <a href="#ww-menu">WW Menu</a>.</p>
-<h4 id="simulation-modes">Simulation Modes</h4>
-<p>Jiggle Physics can be run in two modes:</p>
+<h2 id="simulation-modes">Simulation Modes</h2>
+<p>Jiggle physics can run in two modes:</p>
 <ul>
-<li><strong>Interactive</strong> - good for real-time mouse interaction with jiggle bones. No need to play animation - animated sim will often look choppy in Interactive mode.</li>
-<li><strong>Animated</strong> - it works only when animation is playing. Useful for rendering animation.</li>
+<li><strong>Interactive</strong> - Ideal for real-time mouse interaction with jiggle bones. There is no need to play the animation; however, animated simulations will often look choppy in this mode.</li>
+<li><strong>Animated</strong> - Functions only while the animation is playing. Useful for rendering final animations.</li>
 </ul>
-<p><strong>Note</strong>: Bone simulation when: action baking or during render, won't work in <code>Interactive</code> mode. Wobbly Wiggler built-in <a href="#baking-jiggle-animation">Bake Wiggle</a> operator will automatically use Animated mode.</p>
-<h4 id="jiggle-settings">Jiggle Settings</h4>
+<p>In Animated mode, a loop icon appears next to the <code>Run Physics</code> button labeled <code>Continuous Simulation</code>. Enable this to prevent the simulation from resetting on every playback loop.</p>
+<p><strong>Note</strong>: In <code>Interactive</code> mode, the simulation will not work during rendering or action baking. For rendering, switch to <code>Animated</code> mode. For baking, use the built-in <a href="#baking-jiggle-animation">Bake Wiggle</a> operator.</p>
+<p><strong>Note</strong>: Hidden armatures are not simulated, saving processing time in heavy scenes.</p>
+<h2 id="solvers-verlet-and-xpbd">Solvers: Verlet and XPBD</h2>
+<p>WW features two physics solvers. Switch between them using the <code>Solver</code> dropdown at the top of the Wobbly Wiggler panel. Both solvers support all features described on this page.</p>
+<ul>
+<li><strong>Verlet</strong> - The default option. Fast and softer in appearance; ideal for organic objects.</li>
+<li><strong>XPBD</strong> - Stiffer, featuring more stable collisions; great for cloth and stiff sticks. It is roughly <strong>2-3x slower</strong> than Verlet.</li>
+</ul>
+<video style="width:100%" controls autoplay loop>
+  <source src="./img/solver_compare.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<p><em>The same rig running on Verlet (left) and XPBD (right). Both setups use identical settings, but XPBD appears stiffer.</em></p>
+<p><code>Sub-steps</code> splits every frame into smaller time steps (yielding better collisions and less over-damping). XPBD also includes <code>Solver Iterations</code> (where higher values mean a stiffer, more converged result). XPBD automatically raises its sub-step count if a bone is sufficiently stiff or short, though this can heavily impact performance, particularly if <code>Scale Invariant Gravity</code> is disabled.</p>
+<h2 id="jiggle-settings">Jiggle Settings</h2>
 <video style="width:100%" controls>
   <source src="./img/ww_settings.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video>
-<p><em>Effect of adjusting mass, stiffness, damping, and gravity on the resulting simulation. Simulated in 'Interactive' mode.</em></p>
+<p><em>Demo of adjusting mass, stiffness, damping, and gravity in 'Interactive' mode.</em></p>
 <blockquote>
-<p><strong>Note</strong>: Higher stiffness (or lower mass) results in increased oscillation frequency.</p>
-<p><strong>Note</strong>: Due to the implementation of the physics solver, even if damping is set to 0, there will be some energy loss in the system.</p>
+<p><strong>Higher stiffness</strong> (or lower mass) results in an increased oscillation frequency—this is how physics works.</p>
 </blockquote>
-<h5 id="jiggle-influence">Jiggle Influence</h5>
-<p>This slider can be animated to mute the jiggle effect at specific frames. For example, in the video below, it is muted at fist impact to make the motion feel snappier.</p>
+<h3 id="scale-invariant-gravity">Scale Invariant Gravity</h3>
+<video style="width:100%" controls autoplay loop>
+  <source src="./img/scale_invariant_gravity.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+<ul>
+<li>
+<p><strong>Enabled</strong> (Default): Keeps perceived stiffness uniform so that chains of any length sag similarly under gravity.</p>
+</li>
+<li>
+<p><strong>Disabled</strong>: More realistic—longer chains sag more due to higher torque. Disabling this may cause XPBD instability on shorter chains, requiring increased sub-steps and reduced performance.</p>
+</li>
+</ul>
+<h3 id="jiggle-influence">Jiggle Influence</h3>
+<p>This slider can be animated to mute the jiggle effect on specific frames. For example, in the video below, jiggle is muted at the exact moment of punch impact to make the motion feel snappier.</p>
 <video style="width:100%" controls>
     <source src="./img/ww_mute.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>
-<p><em><code>Left</code>: full jiggle influence. Notice how the spine and arm movements feel too soft and damped, due to jiggle over-relaxing the movement.<br> <code>Right</code>: jiggle influence was muted at fist impact and at the beginning of the spine moving forward, resulting in snappier motion.</em></p>
-<h5 id="wind">Wind</h5>
-<p>You can use an empty as a wind source. Wind strength and direction can be animated. The wind <strong>noise feature works only in Animated mode</strong>.</p>
+<p><em><code>Left</code>: Full jiggle influence. Notice how the spine and arm movements feel overly soft and damped because the jiggle over-relaxes the motion.<br> <code>Right</code>: Jiggle influence is muted at fist impact and at the beginning of the spine moving forward, yielding a snappier motion.</em></p>
+<h3 id="wind">Wind</h3>
+<p>You can use an empty object with a Blender <strong>Wind</strong> force field as your wind source (created via the <code>Add Wind Object</code> button in the Wind panel). Wind strength and direction can both be animated, and wind functions in both Interactive and Animated modes.</p>
 <video style="width:100%" controls>
     <source src="./img/wind.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>
-<p><em>Demo of how wind can affect jiggle bones. Demo uses Animated mode.</em></p>
-<p>With <strong>Wind Influence</strong>, you can control how much wind affects the selected jiggle group. This allows you to disable the wind effect for fingers.</p>
-<blockquote>
-<p><strong>Note</strong>: Wind <code>Noise</code> effect won't work in Interactive mode (noise amplitude is calculated based on frame number).</p>
-</blockquote>
-<h5 id="translation-jiggle">Translation Jiggle</h5>
+<p><em>Demo showing how wind affects jiggle bones (older version; the new version is showcased in the video below).</em></p>
+<p>Wind settings:</p>
+<ul>
+<li><strong>Strength</strong> - The push applied to a stationary bone.</li>
+<li><strong>Noise Amplitude</strong> - Determines the intensity of wind gusts. Strength varies dynamically as <code>Strength * (1 + Noise Amplitude * noise)</code>, and direction sways laterally. A value of 0 indicates steady wind.</li>
+<li><strong>Noise Seed</strong> - Generates a unique sequence of gusts.</li>
+<li><strong>Temporal Frequency</strong> - Noise periods per second, controlling how quickly gusts change and propagate through the rig.</li>
+<li><strong>Spatial Frequency</strong> - Noise periods per meter, dictating the physical size of gusts in space. A value of 0 means a single uniform gust affects the entire rig, while higher values create localized gusts.</li>
+<li><strong>Drag</strong> - Dictates how strongly air speed pushes the bones. Higher values make bones track wind more closely, causing a chain caught in strong wind to settle rather than swing indefinitely.</li>
+</ul>
+<p>Using <strong>Wind Influence</strong>, you can control how strongly wind impacts a specific jiggle group, allowing you to disable wind effects on elements like fingers.</p>
+<video style="width:100%" controls>
+  <source src="./img/wind_new.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<p><em>New, more realistic wind introduced in WWiggler 4.0. It is no longer just simple noise applied with same strength everywhere</em></p>
+<h3 id="translation-jiggle">Translation Jiggle</h3>
 <video style="width:100%" controls>
     <source src="./img/translation_jiggle.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>
-<p><em>Demo of translation jiggle on character root bone (pelvis)</em></p>
+<p><em>Demo of translation jiggle applied to the character's root bone (pelvis).</em></p>
 <blockquote>
-<p><strong>Note</strong>: Translation jiggle works only on unconnected bones (bones without a parent or with a disconnected parent).</p>
+<p><strong>Note</strong>: Translation jiggle can only be assigned to unconnected bones (those without a parent or with a disconnected parent).</p>
 </blockquote>
-<h5 id="roll-jiggle">Roll Jiggle</h5>
-<p>Enables roll axis wiggle (twist around the bone's local Y axis).</p>
+<h3 id="roll-jiggle">Roll Jiggle</h3>
+<p>Enables roll axis wiggle, twisting bones around their local Y-axis.</p>
 <video style="width:100%" controls>
     <source src="./img/roll_jiggle.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>
-<p><em>Demo of roll jiggle on the character's root bone (pelvis)</em></p>
-<h5 id="maximum-angle">Maximum Angle</h5>
-<p>Limits the maximum angle of jiggle bone rotation. Set it to 0.0 to disable the angle limit.</p>
+<p><em>Demo of roll jiggle on the character's root bone (pelvis).</em></p>
+<h3 id="maximum-angle">Maximum Angle</h3>
+<p>Restricts the maximum angle of jiggle bone rotation. Set to 0.0 to disable the limit entirely.</p>
 <video style="width:100%" controls>
     <source src="./img/max_angle.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>
-<p><em>Demo of applying a maximum angle limit on finger bones to prevent them from spreading too much.</em></p>
-<h4 id="collisions">Collisions</h4>
-<p>Wobbly Wiggler supports bone-to-bone, bone-to-mesh, and bone-to-collection collisions.</p>
+<p><em>Demo of applying a maximum angle limit on finger bones to prevent excessive spreading.</em></p>
+<h3 id="fk-mode-use-rotation-jiggle-off">FK Mode (Use Rotation Jiggle Off)</h3>
+<p>Disabling <code>Use Rotation Jiggle</code> enters a simplified FK mode where bones follow their animation while retaining the ability to collide with other bones or meshes.
+Use this when you want fingers to wrap around a collider without introducing jiggle behavior.
+<code>FK Strength</code> specifies how strictly bones adhere to their underlying animation. At 0.0, bones remain pinned to their original positions (they appear to be stuck in a place).</p>
 <video style="width:100%" controls>
-    <source src="./img/hand_ball_collision.mp4" type="video/mp4">
-    Your browser does not support the video tag.
+  <source src="./img/fk_mode.mp4" type="video/mp4">
+Your browser does not support the video tag.
 </video>
-<p><em>Bones (finger) to mesh (sphere) collisions. Tweaking the bone envelope size helps achieve proper collision distances.</em></p>
+<p><em>Finger bones wrapping around a collider in FK mode with 'Use Rotation Jiggle' disabled.</em></p>
+<h2 id="collisions">Collisions</h2>
+<p>Wobbly Wiggler supports both bone-to-bone and bone-to-mesh collisions:</p>
+<ul>
+<li><strong>Bone-to-bone</strong> collisions utilize capsules as contact shapes, meaning the entire body of the bone collides.</li>
+<li><strong>Bone-to-mesh</strong> collisions use the bone tip as the sole contact point against the mesh.</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> You can toggle these shapes via the <a href="#ww-menu">WW Menu</a> under <code>Capsule Collisions</code>.</p>
+</blockquote>
+<p><img alt="Bones Envelope" src="img/collision_envelope.jpg" />
+<em>Bone collision shapes are derived from head/tail radius combined with envelope size.</em></p>
+<p>You can <strong>edit envelopes across multiple selected bones</strong> simultaneously using the Bone Radius and Envelope sliders shown below:</p>
+<p><img alt="Bones Start" src="img/bone_envelopes_editing.jpg" />
+<em>Click the <code>Capsule</code> icon to visualize bone envelopes. Click it again to revert bone rendering to its default state.</em></p>
+<h3 id="collision-settings">Collision Settings</h3>
+<p>Bone-to-bone and bone-to-mesh collisions rely on comparable parameters:</p>
+<ul>
+<li><strong>Friction</strong> - Measures how much lateral speed a bone loses when sliding across a surface.</li>
+<li><strong>Static Friction</strong> - Anchors a resting bone in place, preventing it from creeping down slopes or sliding away under minor forces until a threshold is reached (0 = off).</li>
+<li><strong>Bounciness</strong> - Determines how much impact velocity is reflected off a surface (0 = none, 1 = full).</li>
+<li><strong>Stickiness</strong> (bone-to-mesh only) - Acts as a glue effect, pulling contact tips back toward surfaces to resist detachment and bend chains toward meshes while sliding.</li>
+</ul>
+<video style="width:100%" controls>
+  <source src="./img/static_friction.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<p><em>A chain sliding off a capsule surface despite high dynamic friction; increasing <code>Static Friction</code> resolves this.</em></p>
+<video style="width:100%" controls>
+  <source src="./img/stickiness.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<p><em><code>Stickiness</code> assists in anchoring bones securely to mesh surfaces.</em></p>
+<h3 id="bone-to-bone-collisions">Bone-to-Bone Collisions</h3>
 <video style="width:100%" controls>
     <source src="./img/bone_bone_collision.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>
-<p><em>Bone-to-bone collisions. Use the <code>Assign Collisions to Bone</code> button to enable these kinds of collisions.</em></p>
-<p><img alt="Bones Envelope" src="img/collision_envelope.jpg" />
-<em>Bone collision shape and distances are defined by its envelope properties: head radius, tail radius, and envelope (works as an additional collision margin).</em></p>
-<p>To <strong>edit envelopes for multiple selected bones</strong>, WWiggler provides two helper sliders:</p>
+
+<h4 id="bone-to-bone-panel">Bone-to-Bone Panel</h4>
+<p>This panel lets you assign a bone as a collider so other elements can bounce off it. By default, only bones within the active Jiggle Group can interact with these designated collider bones (stored in the current group's collider list).
+<img alt="Bone-Bone Collisions" src="img/bone_to_bone.jpg" />
+<em>The Yellow button helps us to assign collision to bones from other rigs (see section below)</em></p>
+<p>The top row of buttons handles collider management for the <strong>active</strong> jiggle group:</p>
 <ul>
-<li>Bone Radius</li>
-<li>Envelope</li>
+<li><strong>Assign Collision</strong>: marks selected bones as colliders for the <strong>active</strong> jiggle group.</li>
+<li><strong>X</strong>: Removes collision from selected bones within the <strong>active</strong> group. Shift-clicking removes all collider bones from the active group.</li>
 </ul>
-<p>See bottom of 'Collisions' section on image below.</p>
-<p><img alt="Bones Start" src="img/bone_envelopes_editing.jpg" />
-<em>You can quickly visualize bone envelopes by using the Capsule icon button. Press it again to reset bone rendering to its original state.</em></p>
-<h4 id="physics-presets">Physics presets</h4>
-<p>You can create multiple physics presets in Wobbly Wiggler using the Presets button, marked in red in the image below.</p>
+<p>The bottom row offers matching functionality applied globally to <strong>all jiggle groups</strong>.
+This configuration allows for setups such as:</p>
+<ul>
+<li>Restricting skirt jiggle bones to collide with leg bones while keeping leg bones from self-colliding.</li>
+<li>specific bones can affect all jiggle groups, for example on spine bone you could use 'Assign Collision (all Groups)' and this way all jiggle bones will be pushed out of character torso,</li>
+</ul>
+<p>When pose mode symmetry is active, these operators will automatically assign/remove collision from bone on the other side of the rig.</p>
+<ul>
+<li><strong>Arrow icon</strong> - Selects the collision bones belonging to the active group.</li>
+</ul>
+<h4 id="colliders-from-other-armatures">Colliders from Other Armatures</h4>
+<p>To set up collisions with bones originating from a separate armature, click the armature icon: <code>Edit Colliders From Other Armatures</code> (outlined in yellow on image above).</p>
+<video style="width:100%" controls>
+  <source src="./img/collision_other_rig.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<p><em>Setup procedure for collisions involving separate armatures.</em></p>
+<h3 id="bone-to-mesh-collisions">Bone-to-Mesh Collisions</h3>
+<p>The configuration is straightforward: select your mesh object (or collection), tweak parameters, and you are done.
+<img alt="Bone-Mesh Collisions" src="img/bone_to_mesh.jpg" />
+<em><code>Stickiness</code> is the only new parameter compared to bone-to-bone configurations.</em></p>
+<video style="width:100%" controls>
+    <source src="./img/hand_ball_collision.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<p><em>Example demonstration of bone-to-mesh collisions.</em></p>
+<p><img alt="Setting up global collider mesh" src="img/mesh_as_collider.jpg" />
+<em>Setting up a global collider mesh to influence all Jiggle Groups simultaneously.</em></p>
+<h2 id="bone-connections">Bone Connections</h2>
+<p>A connection functions as a stretchy, rubber-like link pulling two bones together.
+Similar to Jiggle Groups, you can establish multiple connection groups—each with dedicated parameters—and assign selected bones to them.</p>
+<h3 id="connections-panel">Connections Panel</h3>
+<p>Connections act as spring forces pulling two bone tips closer. Use them for skirts, bending bows with hand bones, or preventing separate chains from drifting apart. Note that connections exclusively pull and never push bones apart.</p>
+<p><img alt="Bones Connections" src="img/connections_panel.jpg" /></p>
+<ul>
+<li><strong>Stiffness</strong> and <strong>Damping</strong> - Define spring rigidity and damping characteristics.</li>
+<li><strong>Influence</strong> - Animate connection strength dynamically (a value of 0 deactivates the group's connections).</li>
+<li>The monitor icon in the group list mutes an individual group, while the header monitor icon mutes all connections globally.</li>
+</ul>
+<p>To quickly connect multiple bone chains, select them and click <strong>Connect (Bidirectional)</strong>. If the selected chains run parallel to each other (like fingers), connections are created across them in columns. If they form a circle (like a skirt), the connections loop automatically into a closed ring.</p>
+<video style="width:100%" controls>
+  <source src="./img/connections_skirt.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<p><em>A skirt composed of independent chains held together via cross-connections between neighboring elements.</em></p>
+<h3 id="rest-length">Rest Length</h3>
+<p>Every connection keeps the distance between two bones <strong>at the moment of creation</strong>, pulling them back together whenever they drift.</p>
+<p><code>Capture Rest Length</code> recalibrates active group distances based on the current pose across all connection formats (bone-to-bone, cross-armature, mesh, or empty objects).</p>
+<h3 id="two-and-one-way-connections">Two and One-Way Connections</h3>
+<p><img alt="Connections Types" src="img/connections_types.jpg" /></p>
+<ul>
+<li>
+<p><strong>Two-Way Connections</strong> are created using <code>Connect (Bidirectional)</code>. Both bones pull each other with matching strength—ideal for most standard setups like skirts, shirts, or fingers.</p>
+</li>
+<li>
+<p><strong>One-Way Connections</strong> - A configuration where a single bone is pulled toward an unaffected anchor. The moving bone is designated as the <strong>pulley</strong>, while its destination is the <strong>anchor</strong>. Anchors can be non jiggle bones or other armature bones.</p>
+<ul>
+<li><code>Connect To Active</code> - Sets the active bone as the anchor while pulling all other selected bones toward it (requires at least two selected bones).</li>
+<li><code>Connect To Others</code> - Pulls the active bone toward the the other selected bones (disabled if the active bone is not a jiggle bone). If a mesh or empty object is selected alongside the armature, this binds the bones to it instead (see below).</li>
+</ul>
+</li>
+</ul>
+<video style="width:100%" controls>
+  <source src="./img/connections_bow.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<p><em>Example of a one-way connection from a bow to a finger. The finger pulls both bow tips, but the bow does not affect the finger</em></p>
+<ul>
+<li><code>Release Others</code> / <code>Disconnect From Others</code> - Converts connections into one-way links by removing pull forces or glue bindings. Inactive when no valid targets exist.</li>
+<li><code>Break Connections</code> (the X icon) - Severs links between selected bones. Holding <code>Shift</code> strips every connection in the active group.</li>
+<li><code>Select Connected Bones</code> (the arrow icon) - Selects elements linked to your current selection.</li>
+</ul>
+<p>When <code>X-Axis Mirror</code> is enabled on the armature, these operators automatically mirror changes to corresponding <code>.L</code> / <code>.R</code> bones.</p>
+<blockquote>
+<p><strong>Note</strong>: For connections between <strong>two separate armatures</strong>, select bones from both models simultaneously in multi-object Pose Mode. These cross-rig links operate as one-way structures per rig, where <code>Connect (Bidirectional)</code> creates pulleys on both sides to sync movement, and <code>Capture Rest Length</code> preserves matching scale bounds.</p>
+</blockquote>
+<h3 id="glue-to-an-object">Glue to an Object</h3>
+<p>Jiggle bones can be anchored directly to mesh surfaces via Connections:</p>
+<video style="width:100%" controls>
+  <source src="./img/connections_glue.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<p><em>Gluing selected jiggle bones to a mesh surface.</em></p>
+<p>To glue bones to a mesh:<br></p>
+<blockquote>
+<p>Select your target mesh (or empty object) followed by your armature, enter Pose Mode, highlight your target jiggle bones (such as fingertips), and press <code>Connect To Others</code>. Every chosen bone will pull toward the nearest mesh point (or empty location) while retaining initial distance offsets. These connections dynamically track deforming or rigged meshes.</p>
+</blockquote>
+<h2 id="physics-presets">Physics Presets</h2>
+<p>You can configure and manage multiple physics presets in Wobbly Wiggler using the Presets button highlighted in red below.</p>
 <p><img alt="Jiggle Presets" src="img/ww_presets.jpg" /></p>
-<p><em>From the Presets popover you can add, remove, or refresh physics presets. You can also rename the currently selected preset by clicking on the pen icon.</em></p>
-<h4 id="baking-jiggle-animation">Baking Jiggle Animation</h4>
-<p>WWiggler has an operator for baking jiggle physics into an animation action.</p>
+<p><em>The Presets popover allows you to add, delete, or refresh physics presets, alongside renaming the active preset via the pen icon.</em></p>
+<h2 id="baking-jiggle-animation">Baking Jiggle Animation</h2>
+<p>WWiggler includes a built-in operator for baking live jiggle simulations into standard animation action data.</p>
 <video style="width:100%" controls>
   <source src="./img/baking_wiggle.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video>
-<p><em>Baking jiggle simulation on top of the rig's 'Jump' action into a new separate action called <code>Wiggle</code>. The new action's keyframes are completely separate from the Jump animation.</em></p>
-<h5 id="baking-options">Baking Options</h5>
-<p>This operator is similar to Blender's built-in <a href="https://docs.blender.org/manual/en/2.81/animation/actions.html#bake-action">Bake Action</a> operator, but with additional options specific to jiggle simulation.</p>
+<p><em>Baking jiggle physics on top of a 'Jump' action into a separate action named <code>Wiggle</code>, keeping keyframes entirely independent from the original animation.</em></p>
+<h3 id="baking-options">Baking Options</h3>
+<p>This operator is similar to Blender's native <a href="https://docs.blender.org/manual/en/latest/animation/actions.html">Bake Action</a> tool with few extra, jiggle-specific, simulation parameters.</p>
 <p><img alt="Jiggle Presets" src="img/bake_ui.jpg" /></p>
 <ul>
 <li>
-<p><strong>Action</strong>: create a new action or combine with an existing one</p>
+<p><strong>Action</strong>: Generate a fresh action (<code>Create New Action</code>) or select an existing one from the dropdown.</p>
 </li>
 <li>
 <p><strong>New Action Name</strong>
-    A warning will be displayed if an action with the same name already exists.</p>
+    Defines the name for the generated action (default is <code>Wiggle</code>). A warning appears if an action with that identifier already exists.</p>
 </li>
 <li>
 <p><strong>Combine with overridden Action / Replace overridden Action</strong>
-    Buttons to choose whether to merge with or overwrite an existing action with the same name.</p>
+    Appears when baking into an active action: choose to merge new jiggle keyframes or clear existing keys to write exclusively simulation data.</p>
 </li>
 <li>
-<p><strong>Action Slot</strong>
-    For new Blender 4.5 <a href="https://docs.blender.org/manual/en/latest/animation/actions.html">slotted actions</a></p>
-</li>
-<li>
-<p><strong>Cyclic Simulation</strong>: Indicates that the simulation will loop continuously.</p>
+<p><strong>Continuous Simulation</strong>: Similar to the scene's global 'Continuous Simulation' switch. When enabled, simulation states carry over smoothly when animations loop from final to initial frames. When disabled, simulation resets at timeline starts to maintain identical playback runs.</p>
 <ul>
-<li><strong>Warmup Cycles</strong>: When 'Cyclic Simulation' is enabled, this will run the simulation N times before the final bake to stabilize the results.</li>
+<li><strong>Warmup Cycles</strong>: When 'Continuous Simulation' is active, plays the animation N times prior to final baking so simulations start from a settled state rather than dropping cold.</li>
 </ul>
 </li>
 <li>
-<p><strong>Bones</strong>
-    Dropdown to select which bones to bake (e.g., All Jiggle Bones).</p>
+<p><strong>Bones</strong>: Filters which bones undergo baking.</p>
+<ul>
+<li><code>Active Jiggle Group Bones</code>: Targets bones assigned to the active group.</li>
+<li><code>All Jiggle Bones</code> (default): Targets bones across all jiggle groups.</li>
+<li><code>Selected Bones</code>: Targets explicitly selected bones regardless of jiggle status.</li>
+<li><code>All Bones</code>: Targets every bone in the armature.</li>
+</ul>
 </li>
 <li>
-<p><strong>Rotation / Location / Scale</strong>
-    Choose which transformation properties to bake: rotation, location, and/or scale.</p>
+<p><strong>Channel Types</strong> (<code>Rotation</code> / <code>Location</code> / <code>Scale</code>)
+    Selects which transformation data channels receive keyframes (Rotation captures jiggle movement, Location handles <a href="#translation-jiggle">Translation Jiggle</a>, and Scale for stretch slider).</p>
 </li>
 <li>
 <p><strong>Clear Constraints after Bake</strong>
-    Button to remove constraints from bones after baking.</p>
+    Automatically removes wiggle constraints from baked bones upon bake completion.</p>
+</li>
+<li>
+<p><strong>Pose Reset</strong>: Dictates pose states prior to bake initiation.</p>
+<ul>
+<li><code>Do Nothing</code>: keep the current pose..</li>
+<li><code>To Rest Pose</code>: Clears all bone transforms.</li>
+<li><code>To Animation Pose</code> (default): Reverts bones to their animated pose.</li>
+<li><strong>Reset Unkeyed Bones</strong> (under <code>To Animation Pose</code>):  bones without keyframes lack animated pose to return to; ON(default) - their transforms are cleared too, OFF - they keep their pose.</li>
+</ul>
+</li>
+<li>
+<p><strong>Decimate</strong>
+    Simplifies baked curves post-simulation (0 preserves every keyframe, 1 applies max reduction) using Blender's curve decimation algorithms.</p>
 </li>
 </ul>
 <blockquote>
-<p><strong>Note</strong>: If you are redoing a bake onto a previously baked Wiggle action, make sure to use the <code>Replace overridden Action</code> option. Otherwise, you will end up with the new simulation being run on top of the previously baked jiggle.</p>
+<p><strong>Note</strong>: When re-baking over a previously generated Wiggle action, verify that <code>Replace overridden Action</code> is selected to prevent stacking new simulations on top of older baked layers.</p>
 </blockquote>
-<h4 id="make-action-cyclic">Make Action Cyclic</h4>
-<p>Operator for blending the start and end of an animation. <strong>It uses position, angle, position velocity, and angular velocity blending for more realistic results</strong>—based on the inertialization technique used in Gears of War. It works with any action, not just those created with Wobbly Wiggler.</p>
+<h2 id="make-action-cyclic">Make Action Cyclic</h2>
+<p>An operator designed to seamlessly blend the start and end frames of an animation. <strong>It uses advanced blending covering position, angle, position velocity, and angular velocity for realistic results</strong>—based on the inertialization systems used in <em>Gears of War</em>. It works with any action, not just those generated via Wobbly Wiggler.</p>
 <video style="width:100%" controls>
   <source src="./img/make_cyclic.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video>
-<p><em>The ending of the Punch animation does not match the beginning. Using the 'Make Action Cyclic' operator blends the animation start with the end.</em></p>
-<h5 id="make-cyclic-options">Make Cyclic - Options</h5>
+<p><em>An un-matched punch animation end is smoothed into its starting frame using the 'Make Action Cyclic' tool.</em></p>
+<h3 id="make-cyclic-options">Make Cyclic - Options</h3>
 <p><img alt="Make Action Cyclic" src="img/make_cyclic_ui.jpg" /></p>
 <ul>
-<li><strong>Action</strong>: choose action to make cyclic</li>
-<li><strong>Blend toward Start/End</strong>: 0 - blend ending keyframes toward the start, 1 - blend starting keyframes toward the end, 0.5 - blend equally toward start and end</li>
-<li><strong>Blend Range</strong>: Length of blending in frames. A longer range results in a smoother transition, but it also affects more of the animation.</li>
+<li><strong>Action</strong>: Select the target action to make cyclic</li>
+<li><strong>Blend toward Start/End</strong>: 0 blends end keys into the start; 1 blends start keys into the end; 0.5 splits blending evenly</li>
+<li><strong>Blend Range</strong>: Sets transition length in frames (longer ranges create smoother loops but affect larger portions of the animation).</li>
 </ul>
-<h4 id="ww-menu">WW Menu</h4>
-<p>The Wobbly Wiggler menu is located next to the listing of jiggle groups. It contains several useful operators.
-<img alt="WW Menu" src="img/ww_menu_ui.jpg" /></p>
+<h2 id="ww-menu">WW Menu</h2>
+<p>Located next to the jiggle group list, the Wobbly Wiggler menu contains several useful operators.
+<img alt="WW Menu" src="img/ww_menu_ui.jpg" />
+<em>Character: Mita from MiSide (<a href="#credits">credits</a>)</em></p>
 <ul>
 <li>
 <p><strong>Assign Jiggle to bones</strong>
-    Assigns the active jiggle physics preset to the selected bones.</p>
+    Applies the active physics preset to selected bones.</p>
 </li>
 <li>
 <p><strong>Remove Jiggle from bones</strong>
-    Removes jiggle physics from the selected bones.</p>
+    Clears jiggle physics assignments from selected bones.</p>
 </li>
 <li>
 <p><strong>Select bones in group</strong>
-    Selects all bones that belong to the active jiggle group.</p>
+    Selects all bones linked to the active jiggle group.</p>
+</li>
+<li>
+<p><strong>Select Bone Jiggle Group</strong>
+    Makes the active bone's associated group the primary selection in the UI list.</p>
 </li>
 <li>
 <p><strong>Remove Jiggle Constraints</strong>
-    Deletes jiggle-related constraints from the selected group.</p>
+    Deletes jiggle-related constraints from the active jiggle group Constraints are kept when the simulation stops, so this is the way to remove them.</p>
 </li>
 <li>
 <p><strong>Convert Jiggle Group to Quat</strong>
-    Converts the rotation of bones that belong to the active jiggle group to quaternion mode.</p>
+    Converts rotation formatting for group bones into quaternion mode.</p>
 </li>
 <li>
 <p><strong>Move Up / Move Down</strong>
-    Changes the order of the jiggle group in the list.</p>
+    Reorders jiggle groups within the UI list hierarchy.</p>
 </li>
 <li>
-<p><strong>Use Capsules Collisions</strong>
-    Uses higher quality capsule-shaped bone-to-bone collisions.</p>
+<p><strong>Capsule Collisions</strong>
+    <code>For: Bone to Bone</code> and <code>For: Bone to Mesh</code>: use full bone capsule geometry instead of just tips for collisions. See <a href="#collisions">Collisions</a>.</p>
 </li>
 <li>
 <p><strong>Draw Debug</strong>
-    Displays debug visualization for jiggle physics. Visible in the image above.</p>
+    Toggles visual debugging overlays for physics diagnostics.</p>
 </li>
 <li>
 <p><strong>Write Jiggle on Simulation End</strong>
-    Writes jiggle simulation into bone transformations when the simulation finishes.</p>
+    Bakes live simulation outputs directly into transformations when simulations conclude.</p>
 </li>
 <li>
-<p><strong>Keep Wiggle Constraints</strong>
-    Retains wiggle constraints after the simulation is stopped. They will be muted instead of being removed.</p>
+<p><strong>Rest Pose Update Mode</strong>
+    Determines behavior when manually editing bone positions during paused simulations. <code>Override Rest Position</code> keeps the pose you set. <code>Update Rest Position</code> applies your edit to the animated pose of the bone, so the animation keeps the change.</p>
 </li>
 </ul>
+<h2 id="credits">Credits</h2>
+<p>Character featured in the WW Menu image: "Mita Animation | MiSide Menu" (https://skfb.ly/pMIWx) by Ayanokoji031, licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</p>
               
             </div>
           </div><footer>
@@ -371,5 +586,5 @@ Your browser does not support the video tag.
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-10-04 18:59:05.351237+00:00
+Build Date UTC : 2026-10-23 20:15:24.573892+00:00
 -->
