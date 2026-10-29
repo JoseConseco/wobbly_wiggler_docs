@@ -143,17 +143,22 @@
               
                 <h1 id="wobbly-wiggler">Wobbly Wiggler</h1>
 <p>Wobbly Wiggler (WW) is a Blender add-on designed to add jiggle simulation on top of animated bones.</p>
-<video style="width:100%" controls autoplay loop mute>
+<video style="width:100%" autoplay loop mute controls>
+  <source src="./img/ww_bow_shoot.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<p><em>Demo of the same animation with and without jiggle</em></p>
+<p>Tired of manually adding secondary motion to your character? Wobbly Wiggler will do it for you.</p>
+<video style="width:100%" controls loop mute>
   <source src="./img/ww_jump.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video>
-<p><em>Demo of the same animation with and without jiggle</em></p>
-<p>Tired of manually adding secondary motion to your character? Wobbly Wiggler does it for you.</p>
-<video style="width:100%" controls autoplay loop mute>
+
+<video style="width:100%" controls  loop mute>
   <source src="./img/ww_punch_fast.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video>
-<p><em>Demo of the same animation with and without jiggle</em></p>
+
 <h2 id="location">Location</h2>
 <!-- ![WWiggler Run Cycle](./img/mononoke-run-cycle.gif) -->
 
@@ -185,13 +190,18 @@ Your browser does not support the video tag.
 <p>WW features two physics solvers. Switch between them using the <code>Solver</code> dropdown at the top of the Wobbly Wiggler panel. Both solvers support all features described on this page.</p>
 <ul>
 <li><strong>Verlet</strong> - The default option. Fast and softer in appearance; ideal for organic objects.</li>
-<li><strong>XPBD</strong> - Stiffer, featuring more stable collisions; great for cloth and stiff sticks. It is roughly <strong>2-3x slower</strong> than Verlet.</li>
+<li><strong>XPBD</strong> - Stiffer, featuring more stable collisions; great for cloth and sticks (bows). Con: roughly 2-3x slower than Verlet.</li>
 </ul>
 <video style="width:100%" controls autoplay loop>
   <source src="./img/solver_compare.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video>
-<p><em>The same rig running on Verlet (left) and XPBD (right). Both setups use identical settings, but XPBD appears stiffer.</em></p>
+<p><em>Verlet (left) vs XPBD (right) - same settings. <code>Verlet</code> is softer and more damped. <code>XPBD</code> appears stiffer</em></p>
+<video style="width:100%" controls>
+  <source src="./img/verlet_vs_xpbd_2.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<p><em>XPBD outperforms Verlet for stiff cloth simulation. Verlet suffers from excessive stretching and delayed collision response</em></p>
 <p><code>Sub-steps</code> splits every frame into smaller time steps (yielding better collisions and less over-damping). XPBD also includes <code>Solver Iterations</code> (where higher values mean a stiffer, more converged result). XPBD automatically raises its sub-step count if a bone is sufficiently stiff or short, though this can heavily impact performance, particularly if <code>Scale Invariant Gravity</code> is disabled.</p>
 <h2 id="jiggle-settings">Jiggle Settings</h2>
 <video style="width:100%" controls>
@@ -586,5 +596,5 @@ Your browser does not support the video tag.
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2026-10-23 20:52:26.000293+00:00
+Build Date UTC : 2026-10-29 18:29:54.822814+00:00
 -->
